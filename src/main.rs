@@ -6,6 +6,7 @@ use crossterm::{
     ExecutableCommand,
 };
 use ratatui::{prelude::*, widgets::*};
+use ratatui::widgets::canvas::Points;
 
 fn ui(frame: &mut Frame) {
     let main_layout = Layout::new(
@@ -17,10 +18,29 @@ fn ui(frame: &mut Frame) {
         ],
     )
     .split(frame.size());
+
+    let span_rekord = Span::styled("rekord ",
+        Style::default()
+            .fg(Color::Yellow)
+            .bold()
+    );
+    let span_collektion = Span::styled(
+        "collektion",
+        Style::default()
+            .fg(Color::Red)
+            // .slow_blink()
+    );
+
+    let line = Line::from(vec![span_rekord, span_collektion]);
+    let text: Text = Text::from(vec![line]);
+
     frame.render_widget(
-        Block::new().borders(Borders::TOP).title("rekord"),
+        Paragraph::new(text),
+        // Block::new().borders(Borders::TOP).title("rekord"),
         main_layout[0],
     );
+
+
     frame.render_widget(
         Block::new().borders(Borders::TOP).title("Status Bar"),
         main_layout[2],
@@ -34,6 +54,7 @@ fn ui(frame: &mut Frame) {
     frame.render_widget(Block::bordered().title("One-Shots"), inner_layout[0]);
     frame.render_widget(Block::bordered().title("Loops"), inner_layout[1]);
     frame.render_widget(Block::bordered().title("Stems"), inner_layout[2]);
+
 }
 
 fn main() -> io::Result<()> {
@@ -61,10 +82,4 @@ fn handle_q() -> io::Result<bool> {
         }
     }
     Ok(false)
-
-    // fn ui(frame: &mut Frame) {
-    //     frame.render_widget(
-    //         Paragraph::new("Hello World!").block(Block::bordered().title("Greeting")),
-    //         frame.size(),
-    //     )
 }

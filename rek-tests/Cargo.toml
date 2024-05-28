@@ -1,0 +1,8 @@
+[package]
+name = "rek-tests"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rek-dsp = { path = "../rek-dsp" }
+rek-utils = { path = "../rek-utils" }

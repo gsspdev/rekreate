@@ -1,0 +1,7 @@
+[package]
+name = "rek-dsp"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# rek-utils { path = "../rek-utils" }
